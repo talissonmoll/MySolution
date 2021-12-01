@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application Title="MySolution">
+  <ActionDesign>
+    <Actions>
+      <Action Id="ClearTasksAction" ToolTip="Clear the current Contact’s tasks" Shortcut="Control+Shift+C" ConfirmationMessage="Are you sure you want to clear the {0}’s Tasks list?”" SelectionDependencyType="RequireSingleObject" />
+    </Actions>
+    <ActionToContainerMapping>
+      <ActionContainer Id="RecordEdit">
+        <ActionLink ActionId="ClearTasksAction" IsNewNode="True" />
+      </ActionContainer>
+      <ActionContainer Id="View">
+        <ActionLink ActionId="ClearTasksAction" Removed="True" />
+      </ActionContainer>
+    </ActionToContainerMapping>
+  </ActionDesign>
+  <BOModel>
+    <Class Name="DevExpress.Persistent.BaseImpl.PermissionPolicy.PermissionPolicyUser" Caption="Base User" />
+    <Class Name="DevExpress.Persistent.BaseImpl.PhoneNumber">
+      <OwnMembers>
+        <Member Name="Number" EditMask="(00)0000-0000" />
+      </OwnMembers>
+    </Class>
+    <Class Name="DevExpress.Persistent.BaseImpl.Task">
+      <OwnMembers>
+        <Member Name="DueDate" DisplayFormat="{0:D}" />
+        <Member Name="PercentCompleted" DisplayFormat="{0:N0}%" />
+        <Member Name="StartDate" DisplayFormat="{0:D}" />
+        <Member Name="Subject" RowCount="2" Size="200" />
+      </OwnMembers>
+    </Class>
+    <Class Name="MySolution.Module.BusinessObjects.Payment">
+      <OwnMembers>
+        <Member Name="Rate" ImmediatePostData="True" />
+      </OwnMembers>
+    </Class>
+    <Class Name="MySolution.Module.Contact" ObjectCaptionFormat="{0:FullName} from the {0:Department}" ImageName="Employee">
+      <OwnMembers>
+        <Member Name="Position" DataSourceProperty="Department.Positions" DataSourcePropertyIsNullMode="SelectAll" />
+      </OwnMembers>
+    </Class>
+    <Class Name="MySolution.Module.Department" ImageName="BO_Department" />
+    <Class Name="MySolution.Module.Position" ImageName="BO_Position" />
+  </BOModel>
+  <Options>
+    <LayoutManagerOptions RequiredFieldMark="*" />
+  </Options>
+  <SchemaModules>
+    <SchemaModule Name="SystemModule" Version="21.2.3.0" IsNewNode="True" />
+  </SchemaModules>
+  <Views>
+    <ListView Id="ApplicationUser_ListView" Caption="Users" />
+  </Views>
+</Application>

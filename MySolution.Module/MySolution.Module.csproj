@@ -162,6 +162,10 @@
     <None Include="Controllers\ReadMe.txt" />
     <None Include="DatabaseUpdate\ReadMe.txt" />
     <None Include="Images\ReadMe.txt" />
+    <EmbeddedResource Include="Model.DesignedDiffs.Localization.de.xafml">
+      <DependentUpon>Model.DesignedDiffs.xafml</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <None Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>

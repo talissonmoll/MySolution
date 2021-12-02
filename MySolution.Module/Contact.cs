@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using DevExpress.ExpressApp.ConditionalAppearance;
 
 
 namespace MySolution.Module
@@ -167,6 +168,20 @@ namespace MySolution.Module
             get { return manager; }
             set { SetPropertyValue(nameof(Manager), ref manager, value); }
         }
+
+        private XPCollection<AuditDataItemPersistent> changeHistory;
+        [CollectionOperationSet(AllowAdd = false, AllowRemove = false)]
+        public XPCollection<AuditDataItemPersistent> ChangeHistory
+        {
+            get
+            {
+                if (changeHistory == null)
+                {
+                    changeHistory = AuditedObjectWeakReference.GetAuditTrail(Session, this);
+                }
+                return changeHistory;
+            }
+        }
     }
 
     public enum Priority
@@ -180,6 +195,8 @@ namespace MySolution.Module
 
     [DefaultClassOptions]
     [ModelDefault("Caption", "Task")]
+    [Appearance("FontColorRed", AppearanceItemType = "ViewItem", TargetItems = "*", Context = "ListView",
+    Criteria = "Status!='Completed'", FontColor = "Red")]
     public class DemoTask : Task
     {
 
@@ -195,6 +212,8 @@ namespace MySolution.Module
         }
 
         private Priority priority;
+        [Appearance("PriorityBackColorPink", AppearanceItemType = "ViewItem", Context = "Any",
+        Criteria = "Priority=2", BackColor = "255, 240, 240")]
         public Priority Priority
         {
             get { return priority; }

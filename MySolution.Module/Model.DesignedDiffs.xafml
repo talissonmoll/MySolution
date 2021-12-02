@@ -49,6 +49,7 @@
     <Items>
       <Item Id="Default">
         <Items>
+          <Item Id="Contact_ListView" ViewId="Contact_ListView_Varied" />
           <Item Id="Note" ViewId="Note_ListView" IsNewNode="True" />
         </Items>
       </Item>
@@ -68,17 +69,21 @@
   <Views>
     <ListView Id="ApplicationUser_ListView" Caption="Users" />
     <DetailView Id="Contact_DetailView">
+      <Items>
+        <PropertyEditor Id="Department.Office" PropertyName="Department.Office" IsNewNode="True" />
+      </Items>
       <Layout>
         <LayoutGroup Id="Main" RelativeSize="100">
           <LayoutGroup Id="SimpleEditors" RelativeSize="65.0190114068441">
             <LayoutGroup Id="Contact" RelativeSize="42.397660818713447">
-              <LayoutGroup Id="Contact_col1" RelativeSize="49.887133182844245">
+              <LayoutGroup Id="Contact_col1" RelativeSize="49.775784753363226">
                 <LayoutItem Id="WebPageAddress" RelativeSize="28.571428571428573" />
                 <LayoutItem Id="SpouseName" RelativeSize="21.428571428571427" Index="1" />
-                <LayoutItem Id="TitleOfCourtesy" RelativeSize="50" Index="2" />
+                <LayoutItem Id="TitleOfCourtesy" RelativeSize="21.428571428571427" Index="2" />
+                <LayoutItem Id="Department.Office" ViewItem="Department.Office" Index="3" RelativeSize="28.571428571428573" IsNewNode="True" />
                 <LayoutItem Id="NickName" RelativeSize="21.428571428571427" Removed="True" />
               </LayoutGroup>
-              <LayoutGroup Id="Contact_col2" RelativeSize="50.112866817155755">
+              <LayoutGroup Id="Contact_col2" RelativeSize="50.224215246636774">
                 <LayoutItem Id="Anniversary" RelativeSize="28.571428571428573" />
                 <LayoutItem Id="Department" RelativeSize="21.428571428571427" />
                 <LayoutItem Id="Position" RelativeSize="21.428571428571427" />
@@ -86,12 +91,12 @@
               </LayoutGroup>
             </LayoutGroup>
             <LayoutGroup Id="Person" RelativeSize="33.040935672514621">
-              <LayoutGroup Id="Person_col1" RelativeSize="49.887133182844245">
+              <LayoutGroup Id="Person_col1" RelativeSize="49.775784753363226">
                 <LayoutItem Id="FirstName" RelativeSize="36.363636363636367" />
                 <LayoutItem Id="LastName" RelativeSize="63.636363636363633" />
                 <LayoutItem Id="MiddleName" Removed="True" />
               </LayoutGroup>
-              <LayoutGroup Id="Person_col2" RelativeSize="50.112866817155755">
+              <LayoutGroup Id="Person_col2" RelativeSize="50.224215246636774">
                 <LayoutItem Id="Birthday" RelativeSize="36.363636363636367" />
                 <LayoutItem Id="FullName" RelativeSize="27.272727272727273" />
                 <LayoutItem Id="Email" RelativeSize="36.363636363636367" />
@@ -118,5 +123,56 @@
         </LayoutGroup>
       </Layout>
     </DetailView>
+    <ListView Id="Contact_ListView" Criteria="" IsGroupPanelVisible="True">
+      <Columns>
+        <ColumnInfo Id="Anniversary" Index="-1" />
+        <ColumnInfo Id="Manager" Index="-1" />
+        <ColumnInfo Id="NickName" Index="-1" />
+        <ColumnInfo Id="SpouseName" Index="-1" />
+        <ColumnInfo Id="TitleOfCourtesy" Index="-1" />
+        <ColumnInfo Id="WebPageAddress" Index="-1" />
+        <ColumnInfo Id="FullName" SortOrder="Ascending" Width="148" />
+        <ColumnInfo Id="Email" Index="1" />
+        <ColumnInfo Id="Position" Index="2" SortOrder="Ascending" GroupIndex="1" />
+        <ColumnInfo Id="Department" Index="3" Width="88" SortOrder="Ascending" GroupIndex="0" />
+      </Columns>
+      <Filters CurrentFilterId="Developers">
+        <Filter Id="All Contacts" IsNewNode="True" />
+        <Filter Id="Developers" Criteria="Position.Title = 'Developer'" IsNewNode="True" />
+        <Filter Id="Development Department Contacts" Criteria="[Department.Title] = 'Development Department'" IsNewNode="True" />
+      </Filters>
+    </ListView>
+    <ListView Id="Contact_ListView_AllColumns" ClassName="MySolution.Module.Contact" IsNewNode="True">
+      <Columns IsNewNode="True">
+        <ColumnInfo Id="Address1" PropertyName="Address1" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="Address2" PropertyName="Address2" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="Birthday" PropertyName="Birthday" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="DisplayName" PropertyName="DisplayName" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="Email" PropertyName="Email" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="FirstName" PropertyName="FirstName" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="LastName" PropertyName="LastName" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="MiddleName" PropertyName="MiddleName" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="Notes" PropertyName="Notes" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="Oid" PropertyName="Oid" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="Photo" PropertyName="Photo" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="FullName" PropertyName="FullName" Index="0" SortIndex="0" SortOrder="Ascending" IsNewNode="True" />
+        <ColumnInfo Id="WebPageAddress" PropertyName="WebPageAddress" Index="1" IsNewNode="True" />
+        <ColumnInfo Id="NickName" PropertyName="NickName" Index="2" IsNewNode="True" />
+        <ColumnInfo Id="SpouseName" PropertyName="SpouseName" Index="3" IsNewNode="True" />
+        <ColumnInfo Id="TitleOfCourtesy" PropertyName="TitleOfCourtesy" Index="4" IsNewNode="True" />
+        <ColumnInfo Id="Anniversary" PropertyName="Anniversary" Index="5" IsNewNode="True" />
+        <ColumnInfo Id="Department" PropertyName="Department" Index="6" IsNewNode="True" />
+        <ColumnInfo Id="Position" PropertyName="Position" Index="7" IsNewNode="True" />
+        <ColumnInfo Id="Manager" PropertyName="Manager" Index="8" IsNewNode="True" />
+      </Columns>
+    </ListView>
+    <ListView Id="Contact_ListView_Varied" ClassName="MySolution.Module.Contact" IsNewNode="True">
+      <Variants IsNewNode="True">
+        <Variant Id="All columns" ViewID="Contact_ListView_AllColumns" Caption="All columns" IsNewNode="True" />
+        <Variant Id="Few columns" ViewID="Contact_ListView" Caption="Few columns" IsNewNode="True" />
+      </Variants>
+    </ListView>
+    <ListView Id="DemoTask_ListView" AllowEdit="True" NewItemRowPosition="Top" PreviewColumnName="Description" />
+    <ListView Id="Department_ListView" MasterDetailMode="ListViewAndDetailView" />
   </Views>
 </Application>
